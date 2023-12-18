@@ -49,12 +49,10 @@ const characterList = document.getElementById('character-list')
                             <div class="status-indicator" id="status-indicator"></div>
                             <span>${character.status} - ${character.species}</span>
                         </div>
-
                         <p>Última localização conhecida: ${character.location.name}</p>
                         <p>Visto pela última vez em: ${character.lastEpisode}</p>
                     </div>
                 `
-
                 characterList.appendChild(characterCard)
             })
         }
