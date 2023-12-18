@@ -86,7 +86,10 @@ main {
 .character-description p, 
 .character-description span {
     margin: 5px;
+    
 }
+
+
 
 .status {
     display: flex;
