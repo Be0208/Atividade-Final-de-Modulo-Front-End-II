@@ -106,6 +106,7 @@ const characterList = document.getElementById('character-list');
                 <p>Total de Personagens: ${charactersData.info.count}</p>
                 <p>Total de Localizações: ${locationsData.info.count}</p>
                 <p>Total de Episódios: ${episodesData.info.count}</p>
+                <p>Desenvolvido por BernardoDartora em 2023</p>
             `;
         }
 
