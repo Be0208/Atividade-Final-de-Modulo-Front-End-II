@@ -7,20 +7,34 @@ const characterList = document.getElementById('character-list')
         async function getCharacters(page = 1) {
             const response = await fetch(`${apiUrl}?page=${page}`)
             const data = await response.json()
-
+        
             const charactersWithEpisodes = await Promise.all(
                 data.results.map(async character => {
-                    const episodeResponse = await fetch(character.episode[0])
-                    const episodeData = await episodeResponse.json()
-                    character.lastEpisode = episodeData.name
+                    const episodesPromises = character.episode.map(async episodeUrl => {
+                        const episodeResponse = await fetch(episodeUrl)
+                        const episodeData = await episodeResponse.json()
+                        return episodeData
+                    })
+        
+                    const episodes = await Promise.all(episodesPromises)
+        
+                    // Encontrar o último episódio
+                    const lastEpisode = episodes.reduce((latest, current) => {
+                        const currentEpisodeDate = new Date(current.air_date)
+                        const latestEpisodeDate = new Date(latest.air_date)
+
+                        return currentEpisodeDate > latestEpisodeDate ? current : latest
+                    })
+        
+                    character.lastEpisode = lastEpisode.name
                     return character
                 })
             )
-
+        
             totalPages = data.info.pages
             return { ...data, results: charactersWithEpisodes }
         }
-
+        
         function displayCharacters(characters) {
             characterList.innerHTML = ''
         
@@ -41,25 +55,26 @@ const characterList = document.getElementById('character-list')
                         statusColor = 'gray'
                 }
                 characterCard.innerHTML = `
-                    <img src="${character.image}" class="character-image" alt="${character.name}">
-                    <div class="character-description">
-                        <p>${character.id}</p>
-                        <h2>${character.name}</h2>
-                        <div class="status">
-                            <div class="status-indicator" id="status-indicator"></div>
-                            <span>${character.status} - ${character.species}</span>
-                        </div>
-                        <p>Última localização conhecida: ${character.location.name}</p>
-                        <p>Visto pela última vez em: ${character.lastEpisode}</p>
+                <img src="${character.image}" class="character-image" alt="${character.name}">
+                <div class="character-description">
+                    <p>${character.id}</p>
+                    <h2>${character.name}</h2>
+                    <div class="status">
+                        <div class="status-indicator" style="background-color: ${statusColor}"></div>
+                        <span>${character.status} - ${character.species}</span>
                     </div>
+
+                    <p>Última localização conhecida: ${character.location.name}</p>
+                    <p>Visto pela última vez em: ${character.lastEpisode}</p>
+                </div>
                 `
+
                 characterList.appendChild(characterCard)
             })
         }
 
         function displayPagination() {
             paginationContainer.innerHTML = ''
-
             const buttonAnteriorHTML = currentPage > 1 ? `<button id="btn-anterior" onclick=changePage(${currentPage - 1})> ${currentPage - 1} </button>` : ''
             const buttonAtualHTML = `<button style="background-color: gray " class="current-page">${currentPage}</button>`
             const buttonPosteriorHTML = currentPage < totalPages ? `<button id="btn-posterior" onclick=changePage(${currentPage + 1})> ${currentPage + 1} </button>` : ''
@@ -67,7 +82,6 @@ const characterList = document.getElementById('character-list')
                 <span>...</span>
                 <button id="btn-posterior" onclick=changePage(${totalPages})> ${totalPages} </button>
             `
-
             paginationContainer.innerHTML = `
                 ${buttonAnteriorHTML}
                 ${buttonAtualHTML}
@@ -75,21 +89,16 @@ const characterList = document.getElementById('character-list')
                 ${buttonFinalHTML}
             `
         }
-
         async function fetchAndDisplayCharacters(page) {
             const charactersData = await getCharacters(page)
-
             currentPage = page
             displayCharacters(charactersData)
             displayPagination()
             fetchApiInfo()
         }
-
         // Carregar personagens da primeira página ao carregar a página
         fetchAndDisplayCharacters(1)
-
         const searchInput = document.getElementById('search-input')
-
         async function searchCharacters() {
             const searchTerm = searchInput.value.trim()
             if (searchTerm === '') {
@@ -100,17 +109,13 @@ const characterList = document.getElementById('character-list')
                 displayCharacters(searchData)
             }
         }
-
         async function fetchApiInfo() {
             const charactersResponse = await fetch('https://rickandmortyapi.com/api/character')
             const charactersData = await charactersResponse.json()
-
             const locationsResponse = await fetch('https://rickandmortyapi.com/api/location')
             const locationsData = await locationsResponse.json()
-
             const episodesResponse = await fetch('https://rickandmortyapi.com/api/episode')
             const episodesData = await episodesResponse.json()
-
             const apiInfoContainer = document.getElementById('api-info')
             apiInfoContainer.innerHTML = `
                 <p>Total de Personagens: ${charactersData.info.count}</p>
@@ -119,13 +124,11 @@ const characterList = document.getElementById('character-list')
                 <p>Desenvolvido por BernardoDartora em 2023</p>
             `
         }
-
         function changePage(newPage) {
             if (newPage >= 1 && newPage <= totalPages) {
                 fetchAndDisplayCharacters(newPage)
             }
         }
-
         function reloadPage() {
             location.reload()
         }

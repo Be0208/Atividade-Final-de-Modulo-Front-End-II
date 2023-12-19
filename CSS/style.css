@@ -13,8 +13,9 @@ header {
 }
 
 #api-title {
-    font-size: 24px;
+    font-size: 4rem;
     margin-bottom: 10px;
+    color: #146E37;
 }
 
 nav {
@@ -22,12 +23,15 @@ nav {
     justify-content: center;
 }
 
-.search-bar {
-    display: flex;
+#search-input {
     gap: 10px;
+    width: 30rem;
+    display: flex;
+
+    
 }
 
-input[type="text"] {
+input[type="search"] {
     padding: 8px;
     font-size: 14px; 
     border-radius: 10px;
@@ -42,7 +46,7 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+button:hover, #logo:hover {
     background-color: gray;
     border-radius: 10px;
 }
@@ -86,10 +90,7 @@ main {
 .character-description p, 
 .character-description span {
     margin: 5px;
-    
 }
-
-
 
 .status {
     display: flex;
@@ -98,7 +99,6 @@ main {
 
 .status-indicator {
     display: inline-block;
-    background-color: green;
     border-radius: 50%;
     width: 8px;
     height: 8px;
@@ -127,10 +127,19 @@ main {
 }
 
 #logo{
-    max-width: 5%;
+    max-width: 6vh;
     display: block;
     margin: 0;
     padding: 0;
     float: left;
   
+}
+
+#search{
+    max-width: 2rem;
+    max-height: 2rem;
+    display: block;
+    margin: 0;
+    padding: 0;
+    float: right;
 }
