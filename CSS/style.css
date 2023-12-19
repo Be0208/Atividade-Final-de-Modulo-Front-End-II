@@ -5,8 +5,14 @@ body {
     background-color: #f8f9fa;
 }
 
+#linea{
+    height: 2px;
+    width: 100%;
+    background-color: #146E37;
+}
+
 header {
-    background-color: #343a40;
+    background-color: rgb(232, 232, 232);
     color: #fff;
     padding: 20px;
     text-align: center;
@@ -26,9 +32,7 @@ nav {
 #search-input {
     gap: 10px;
     width: 30rem;
-    display: flex;
-
-    
+    display: flex; 
 }
 
 input[type="search"] {
@@ -46,7 +50,7 @@ button {
     cursor: pointer;
 }
 
-button:hover, #logo:hover {
+button:hover, #logo:hover, #search:hover {
     background-color: gray;
     border-radius: 10px;
 }
@@ -67,7 +71,7 @@ main {
     display: flex;
     border: 1px solid #ccc;
     border-radius: 5px;
-    margin: 10px;
+    margin: 30px;
     padding: 10px;
     width: calc(33.33% - 20px);
     background-color: #fff;
@@ -140,6 +144,7 @@ main {
     max-height: 2rem;
     display: block;
     margin: 0;
-    padding: 0;
-    float: right;
+    padding: 10px;
+    background-color: rgb(232, 232, 232);
+    cursor: pointer;
 }

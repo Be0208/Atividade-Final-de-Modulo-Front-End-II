@@ -10,12 +10,11 @@
 
 <body>
     <header>
-
         <img onclick="reloadPage()" id="logo" src="./image/RICK_MORTY_ICON.png" alt="logo">
         <h1 id="api-title">API de Rick and Morty</h1>
         <nav>
             <input type="search" id="search-input" placeholder="Pesquisar personagem...">
-            <button><img id="search" onclick="searchCharacters()" src="./image/search.png" alt="" srcset=""></button>
+            <img id="search" onclick="searchCharacters()" src="./image/search.png" alt="" srcset="">
         </nav>
     </header>
 
@@ -29,9 +28,10 @@
     <footer>
         <div id="api-info"></div>
     </footer>
-    <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="./JS/script.js"></script>
 
 </body>
+
 
 </html>
