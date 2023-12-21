@@ -143,7 +143,6 @@ async function fetchApiInfo() {
 
                 <p>Desenvolvido por <strong>BernardoDartora</strong> em 2023</p>
                 <a href="https://github.com/Be0208" target="_blank">Meu GitHub</a>
-
             `
     } catch (error) {
         console.error('Error fetching API info:', error)
