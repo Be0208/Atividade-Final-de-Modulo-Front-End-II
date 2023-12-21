@@ -105,23 +105,31 @@ async function fetchAndDisplayCharacters(page) {
         displayPagination()
         fetchApiInfo()
 }
+ 
 
-        
+
+const searchInput = document.getElementById('search-input');
+searchInput.addEventListener('keyup', function(event) {
+    if (event.key === 'Enter') {
+        searchCharacters(); // Chama a função searchCharacters ao pressionar "Enter"
+    }
+});
 
 async function searchCharacters() {
-    const searchTerm = document.getElementById('search-input').value.trim()
+    const searchTerm = searchInput.value.trim();
+
     if (searchTerm === '') {
-        fetchAndDisplayCharacters(1)
+        fetchAndDisplayCharacters(1);
     } else {
         try {
-            const response = await axios.get(`${apiUrl}?name=${searchTerm}`)
-            const searchData = { ...response.data, results: response.data.results.map(character => ({ ...character, lastEpisode: '' })) }
-            currentPage = 1
-            totalPages = 1
-            displayCharacters(searchData)
-            displayPagination()
+            const response = await axios.get(`${apiUrl}?name=${searchTerm}`);
+            const searchData = { ...response.data, results: response.data.results.map(character => ({ ...character, lastEpisode: '' })) };
+            currentPage = 1;
+            totalPages = 1;
+            displayCharacters(searchData);
+            displayPagination();
         } catch (error) {
-            console.error('Error searching characters:', error)
+            console.error('Error searching characters:', error);
         }
     }
 }
