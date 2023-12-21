@@ -13,9 +13,16 @@ async function getCharacters(page = 1) {
                         return episodeResponse.data
                         })
                     )
-            character.lastEpisode = episodes.reduce((latest, current) => 
-                new Date(current.air_date) > new Date(latest.air_date) ? current : latest).name
-            return character
+                    character.lastEpisode = episodes.reduce((latest, current) => {
+                        if (new Date(current.air_date) > new Date(latest.air_date)) {
+                            return current;
+                        } else {
+                            return latest;
+                        }
+                    }).name;
+                    
+                    return character;
+                    
         })
         )
 
@@ -58,15 +65,29 @@ function getStatusColor(status) {
 }
 
 function displayPagination() {
-    const paginationContainer = document.getElementById('pagination')
-    const buttonAnteriorHTML = currentPage > 1 ? `<button onclick="changePage(${currentPage - 1})">${currentPage - 1}</button>` : ''
-    const buttonAtualHTML = `<button style="background-color: gray" class="current-page">${currentPage}</button>`
-    const buttonPosteriorHTML = currentPage < totalPages ? `<button onclick="changePage(${currentPage + 1})">${currentPage + 1}</button>` : ''
-    const buttonFinalHTML = currentPage + 1 === totalPages || currentPage === totalPages ? '' : `
-        <span>...</span>
-        <button onclick="changePage(${totalPages})">${totalPages}</button>
-    `
-    paginationContainer.innerHTML = `${buttonAnteriorHTML}${buttonAtualHTML}${buttonPosteriorHTML}${buttonFinalHTML}`
+    const paginationContainer = document.getElementById('pagination');
+
+    let buttonAnteriorHTML = '';
+    if (currentPage > 1) {
+        buttonAnteriorHTML = `<button onclick="changePage(${currentPage - 1})">${currentPage - 1}</button>`;
+    }
+
+    const buttonAtualHTML = `<button style="background-color: gray" class="current-page">${currentPage}</button>`;
+
+    let buttonPosteriorHTML = '';
+    if (currentPage < totalPages) {
+        buttonPosteriorHTML = `<button onclick="changePage(${currentPage + 1})">${currentPage + 1}</button>`;
+    }
+
+    let buttonFinalHTML = '';
+    if (currentPage + 1 !== totalPages && currentPage !== totalPages) {
+        buttonFinalHTML = `
+            <span>...</span>
+            <button onclick="changePage(${totalPages})">${totalPages}</button>
+        `;
+    }
+
+    paginationContainer.innerHTML = `${buttonAnteriorHTML}${buttonAtualHTML}${buttonPosteriorHTML}${buttonFinalHTML}`;
 }
 
 async function fetchAndDisplayCharacters(page) {
@@ -109,7 +130,9 @@ async function fetchApiInfo() {
                 <p>Total de Personagens: ${charactersData.data.info.count}</p>
                 <p>Total de Localizações: ${locationsData.data.info.count}</p>
                 <p>Total de Episódios: ${episodesData.data.info.count}</p>
-                <p>Desenvolvido por BernardoDartora em 2023</p>
+                <p>Desenvolvido por <strong>BernardoDartora</strong> em 2023</p>
+                <a href="https://github.com/Be0208" target="_blank">Meu GitHub</a>
+
             `
     } catch (error) {
         console.error('Error fetching API info:', error)

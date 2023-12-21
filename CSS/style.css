@@ -5,12 +5,6 @@ body {
     background-color: #f8f9fa;
 }
 
-#linea{
-    height: 2px;
-    width: 100%;
-    background-color: #146E37;
-}
-
 header {
     background-color: rgb(232, 232, 232);
     color: #fff;
@@ -25,20 +19,22 @@ header {
 }
 
 nav {
+    width: 37rem;
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    margin: 20px auto; /* Adiciona margem e centraliza na página */
+    border-radius: 8px;
+    border: 2px solid black; /* Adiciona borda preta */
 }
 
 #search-input {
-    gap: 10px;
-    width: 30rem;
-    display: flex; 
-}
-
-input[type="search"] {
+    flex: 1; /* Ocupa o espaço disponível */
     padding: 8px;
-    font-size: 14px; 
-    border-radius: 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    background-color: rgb(232, 232, 232);
 }
 
 button {
@@ -49,6 +45,7 @@ button {
     border: none;
     cursor: pointer;
 }
+
 
 button:hover, #logo:hover, #search:hover {
     background-color: gray;
@@ -147,4 +144,8 @@ main {
     padding: 10px;
     background-color: rgb(232, 232, 232);
     cursor: pointer;
+}
+
+a {
+    color: white;
 }
