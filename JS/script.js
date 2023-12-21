@@ -15,13 +15,13 @@ async function getCharacters(page = 1) {
                     )
                     character.lastEpisode = episodes.reduce((latest, current) => {
                         if (new Date(current.air_date) > new Date(latest.air_date)) {
-                            return current;
+                            return current
                         } else {
-                            return latest;
+                            return latest
                         }
-                    }).name;
+                    }).name
                     
-                    return character;
+                    return character
                     
         })
         )
@@ -65,9 +65,9 @@ function getStatusColor(status) {
 }
 
 function displayPagination() {
-    const paginationContainer = document.getElementById('pagination');
+    const paginationContainer = document.getElementById('pagination')
 
-    let buttonInicialHtml = '';
+    let buttonInicialHtml = ''
     if (currentPage > 2) {
         
         buttonInicialHtml = `
@@ -75,27 +75,27 @@ function displayPagination() {
         <span>... </span>`
     }
 
-    let buttonAnteriorHTML = '';
+    let buttonAnteriorHTML = ''
     if (currentPage > 1) {
-        buttonAnteriorHTML = `<button onclick="changePage(${currentPage - 1})">${currentPage - 1}</button>`;
+        buttonAnteriorHTML = `<button onclick="changePage(${currentPage - 1})">${currentPage - 1}</button>`
     }
 
-    const buttonAtualHTML = `<button style="background-color: gray" class="current-page">${currentPage}</button>`;
+    const buttonAtualHTML = `<button style="background-color: gray" class="current-page">${currentPage}</button>`
 
-    let buttonPosteriorHTML = '';
+    let buttonPosteriorHTML = ''
     if (currentPage < totalPages) {
-        buttonPosteriorHTML = `<button onclick="changePage(${currentPage + 1})">${currentPage + 1}</button>`;
+        buttonPosteriorHTML = `<button onclick="changePage(${currentPage + 1})">${currentPage + 1}</button>`
     }
 
-    let buttonFinalHTML = '';
+    let buttonFinalHTML = ''
     if (currentPage + 1 !== totalPages && currentPage !== totalPages) {
         buttonFinalHTML = `
             <span>...</span>
             <button onclick="changePage(${totalPages})">${totalPages}</button>
-        `;
+        `
     }
 
-    paginationContainer.innerHTML = `${buttonInicialHtml}${buttonAnteriorHTML}${buttonAtualHTML}${buttonPosteriorHTML}${buttonFinalHTML}`;
+    paginationContainer.innerHTML = `${buttonInicialHtml}${buttonAnteriorHTML}${buttonAtualHTML}${buttonPosteriorHTML}${buttonFinalHTML}`
 }
 
 async function fetchAndDisplayCharacters(page) {
@@ -108,28 +108,28 @@ async function fetchAndDisplayCharacters(page) {
  
 
 
-const searchInput = document.getElementById('search-input');
+const searchInput = document.getElementById('search-input')
 searchInput.addEventListener('keyup', function(event) {
     if (event.key === 'Enter') {
-        searchCharacters(); // Chama a função searchCharacters ao pressionar "Enter"
+        searchCharacters()
     }
-});
+})
 
 async function searchCharacters() {
-    const searchTerm = searchInput.value.trim();
+    const searchTerm = searchInput.value.trim()
 
     if (searchTerm === '') {
-        fetchAndDisplayCharacters(1);
+        fetchAndDisplayCharacters(1)
     } else {
         try {
-            const response = await axios.get(`${apiUrl}?name=${searchTerm}`);
-            const searchData = { ...response.data, results: response.data.results.map(character => ({ ...character, lastEpisode: '' })) };
-            currentPage = 1;
-            totalPages = 1;
-            displayCharacters(searchData);
-            displayPagination();
+            const response = await axios.get(`${apiUrl}?name=${searchTerm}`)
+            const searchData = { ...response.data, results: response.data.results.map(character => ({ ...character, lastEpisode: '' })) }
+            currentPage = 1
+            totalPages = 1
+            displayCharacters(searchData)
+            displayPagination()
         } catch (error) {
-            console.error('Error searching characters:', error);
+            console.error('Error searching characters:', error)
         }
     }
 }
