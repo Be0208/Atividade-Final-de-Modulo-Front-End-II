@@ -67,6 +67,14 @@ function getStatusColor(status) {
 function displayPagination() {
     const paginationContainer = document.getElementById('pagination');
 
+    let buttonInicialHtml = '';
+    if (currentPage > 2) {
+        
+        buttonInicialHtml = `
+        <button onclick="changePage(1)">1</button>
+        <span>... </span>`
+    }
+
     let buttonAnteriorHTML = '';
     if (currentPage > 1) {
         buttonAnteriorHTML = `<button onclick="changePage(${currentPage - 1})">${currentPage - 1}</button>`;
@@ -87,7 +95,7 @@ function displayPagination() {
         `;
     }
 
-    paginationContainer.innerHTML = `${buttonAnteriorHTML}${buttonAtualHTML}${buttonPosteriorHTML}${buttonFinalHTML}`;
+    paginationContainer.innerHTML = `${buttonInicialHtml}${buttonAnteriorHTML}${buttonAtualHTML}${buttonPosteriorHTML}${buttonFinalHTML}`;
 }
 
 async function fetchAndDisplayCharacters(page) {
@@ -127,9 +135,12 @@ async function fetchApiInfo() {
         ])
         const apiInfoContainer = document.getElementById('api-info')
             apiInfoContainer.innerHTML = `
+                <div class="info">
                 <p>Total de Personagens: ${charactersData.data.info.count}</p>
                 <p>Total de Localizações: ${locationsData.data.info.count}</p>
                 <p>Total de Episódios: ${episodesData.data.info.count}</p>
+                </div>
+
                 <p>Desenvolvido por <strong>BernardoDartora</strong> em 2023</p>
                 <a href="https://github.com/Be0208" target="_blank">Meu GitHub</a>
 

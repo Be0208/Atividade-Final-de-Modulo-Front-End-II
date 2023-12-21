@@ -18,6 +18,7 @@ header {
     color: #146E37;
 }
 
+
 nav {
     width: 37rem;
     display: flex;
@@ -28,6 +29,7 @@ nav {
     border: 2px solid black; /* Adiciona borda preta */
 }
 
+
 #search-input {
     flex: 1; /* Ocupa o espaço disponível */
     padding: 8px;
@@ -36,6 +38,7 @@ nav {
     border-radius: 8px;
     background-color: rgb(232, 232, 232);
 }
+
 
 button {
     padding: 8px 12px;
@@ -52,17 +55,20 @@ button:hover, #logo:hover, #search:hover {
     border-radius: 10px;
 }
 
+
 main {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
 }
 
+
 #character-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
 }
+
 
 .character-card {
     display: flex;
@@ -74,6 +80,7 @@ main {
     background-color: #fff;
 }
 
+
 .character-image {
     width: 50%;
     height: 100%;
@@ -81,11 +88,13 @@ main {
     margin-right: 10px;
 }
 
+
 .character-description {
     display: flex;
     flex-direction: column;
     width: 100%;
 }
+
 
 .character-description h2,
 .character-description p, 
@@ -93,10 +102,12 @@ main {
     margin: 5px;
 }
 
+
 .status {
     display: flex;
     align-items: center;
 }
+
 
 .status-indicator {
     display: inline-block;
@@ -106,10 +117,12 @@ main {
     margin-right: 5px;
 }
 
+
 #pagination {
     margin-top: 20px;
     text-align: center;
 }
+
 
 #api-info {
     margin-top: 20px;
@@ -117,6 +130,18 @@ main {
     background-color: #343a40;
     color: #fff;
     text-align: center;
+}.info{
+    justify-content: center;
+    gap: 30px;
+    padding: 30px 0px 30px 0px;
+    display: flex;
+}a{
+    color: white;  
+    background-color: gray;
+    border-radius: 10px;
+    padding: 5px;
+}a:link{
+    text-decoration: none;
 }
 
 #portal {
@@ -124,7 +149,7 @@ main {
     margin: 0 auto;
     max-width: 40%;
     height: auto;
-    margin-top: 20px; /* Ajuste conforme necessário para espaçamento */
+    margin-top: 20px;
 }
 
 #logo{
@@ -146,6 +171,3 @@ main {
     cursor: pointer;
 }
 
-a {
-    color: white;
-}
