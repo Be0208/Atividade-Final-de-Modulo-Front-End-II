@@ -22,16 +22,16 @@ header {
 nav {
     width: 37rem;
     display: flex;
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
-    margin: 20px auto; /* Adiciona margem e centraliza na página */
+    justify-content: center; 
+    align-items: center; 
+    margin: 20px auto; 
     border-radius: 8px;
-    border: 2px solid black; /* Adiciona borda preta */
+    border: 2px solid black; 
 }
 
 
 #search-input {
-    flex: 1; /* Ocupa o espaço disponível */
+    flex: 1; 
     padding: 8px;
     font-size: 14px;
     border: none;
