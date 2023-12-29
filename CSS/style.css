@@ -154,11 +154,13 @@ main {
 
 #logo{
     max-width: 6vh;
-    display: block;
+    
     margin: 0;
     padding: 0;
-    float: left;
-  
+    position: fixed;
+    top: 0;
+    left: 0;
+    cursor: pointer; 
 }
 
 #search{

@@ -1,11 +1,11 @@
 const apiUrl = 'https://rickandmortyapi.com/api/character'
 let currentPage = 1
 let totalPages = 1
-
+let charactersWithEpisodes
 async function getCharacters(page = 1) {
     try {
         const response = await axios.get(`${apiUrl}?page=${page}`)
-        const charactersWithEpisodes = await Promise.all(
+        charactersWithEpisodes = await Promise.all(
             response.data.results.map(async character => {
                 const episodes = await Promise.all(
                     character.episode.map(async episodeUrl => {
@@ -13,13 +13,10 @@ async function getCharacters(page = 1) {
                         return episodeResponse.data
                         })
                     )
-                    character.lastEpisode = episodes.reduce((latest, current) => {
-                        if (new Date(current.air_date) > new Date(latest.air_date)) {
+                    character.lastEpisode = episodes.reduce((larest, current) => {
+                        if (true) {
                             return current
-                        } else {
-                            return latest
-                        }
-                    }).name
+                        }}).name
                     
                     return character
                     
@@ -123,7 +120,7 @@ async function searchCharacters() {
     } else {
         try {
             const response = await axios.get(`${apiUrl}?name=${searchTerm}`)
-            const searchData = { ...response.data, results: response.data.results.map(character => ({ ...character, lastEpisode: '' })) }
+            const searchData = { ...response.data, results: response.data.results.map(character => ({ ...   character, lastEpisode: character })) }
             currentPage = 1
             totalPages = 1
             displayCharacters(searchData)
