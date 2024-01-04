@@ -13,9 +13,9 @@ async function getCharacters(page = 1) {
                         return episodeResponse.data
                         })
                     )
-                    character.lastEpisode = episodes.reduce((larest, current) => {
+                    character.lastEpisode = episodes.reduce((one, last) => {
                         if (true) {
-                            return current
+                            return last
                         }}).name
                     
                     return character
